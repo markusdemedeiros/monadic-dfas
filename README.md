@@ -21,6 +21,10 @@ fa_to_dfa (FA delta q0) = FA delta' (return q0)
 ```
 In fact, performing this operation on a FA in the ``Maybe`` monad yields a structure that's isomorphic to the standard completion procedure for partial DFA's: adding a finalizing state to which all undefined transitions map to! These seemingly unrelated constructions of DFA's in some way appear to have a common structure. 
 
+### Some thoughts
+``List`` may not be the correct monad for this. In particular, ``List`` is infinite, and states we consider equivalent in the NFA to DFA construction are distinct (`[a, a] != [a]`). I am not certain that `Set` is a monad on a finite set, and will investigate this further. Some questions with monad morphisms remain, which I think may shine some light on this issue. 
+
+
 ### Questions
 
 Perhaps we can generalize this further. If my understanding is correct, every monad has a natrual transformation into the identity monad over it's Kleisli category. Can we write a general emulation function for FA's between which there is a natural transformation? 
