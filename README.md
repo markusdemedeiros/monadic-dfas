@@ -11,7 +11,7 @@ and we can define the evaluation of a FA as a monadic fold
 run_FA :: (Monad m) => FA m q s -> [s] -> m q
 run_FA (FA delta q0) ss = foldM delta q0 ss
 ```
-The choice of model appears to make this model very general. Using the ``Identity`` monad gives us a regular, total DFA. The ``[]`` monad gives us a NFA. A partial DFA is given by the ``Maybe`` monad. 
+The choice of monad appears to make this model very general. Using the ``Identity`` monad gives us a regular, total DFA. The ``[]`` monad gives us a NFA. A partial DFA is given by the ``Maybe`` monad. 
 
 Interestingly, we can generalize the NFA to DFA transformation to work with any FA under this framework. Under this general construction the state type becomes the type of lifted states, and the transition function amounts to a bind. 
 ```
